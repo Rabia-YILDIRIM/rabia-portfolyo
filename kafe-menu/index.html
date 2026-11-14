@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kafe Menüsü</title>
+
+
+    <style>
+        body {
+            background-color: #faf3e8;
+            color: #3e2b21;
+            font-family: Georgia, serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        li {
+            background-color: #fffcf7;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .fiyat {
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .kapak {
+            display: block;
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        button {
+            background-color: #fff;
+            color: #3e2b21;
+            border: 1px solid #b99b84;
+            border-radius: 20px;
+            padding: 8px 14px;
+            margin: 0 4px 6px 0;
+            font: inherit;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #efe0d0;
+            }
+        body {
+            background-color: #2b1b14;
+            color: #f1d28a;
+        }
+
+        li {
+            background-color: #41291e;
+            align-items: center;
+        }
+
+        .fiyat {
+            color: #ffd98a;
+        }
+
+        button {
+            background-color: #41291e;
+            color: #f1d28a;
+            border-color: #b78c52;
+        }
+
+            button:hover {
+                background-color: #5b3c29;
+            }
+            button[aria-pressed="true"] {
+                background-color: #f1d28a;
+                color: #2b1b14;
+            }
+        .urun {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+            .urun img {
+                object-fit: cover;
+                border-radius: 8px;
+            }
+    </style>
+</head>
+<body>
+    <h1>Kafe Menüsü</h1>
+    <img class="kapak" src="kafe.jpg" alt="Kafe menüsü kapak fotoğrafı">
+    <p>
+        <button type="button" onclick="filtrele('tumu')">Tümü</button>
+        <button type="button" onclick="filtrele('sicak')">Sıcak İçecekler</button>
+        <button type="button" onclick="filtrele('soguk')">Soğuk İçecekler</button>
+        <button type="button" onclick="filtrele('tatli')">Tatlılar</button>
+    </p>
+
+    <h2 id="sicak">Sıcak İçecekler</h2>
+    <ul>
+        <li>
+            <span class="urun">
+                <img src="turk-kahvesi.png" alt="" width="56" height="56">
+                Türk kahvesi
+            </span>
+            <span class="fiyat">80 TL</span>
+        </li>
+        <li>
+            <span class="urun">
+                <img src="latte.png" alt="" width="56" height="56">
+                Latte
+            </span>
+            <span class="fiyat">110 TL</span>
+        </li>
+        <li>
+            <span class="urun">
+                <img src="cappuccino.png" alt="" width="56" height="56">
+                Cappuccino
+            </span>
+            <span class="fiyat">115 TL</span>
+        </li>
+    </ul>
+    <h2 id="soguk">Soğuk İçecekler</h2>
+    <ul>
+        <li>
+            <span class="urun">
+                <img src="buzlu-latte.png" alt="" width="56" height="56">
+                Buzlu latte
+            </span>
+            <span class="fiyat">125 TL</span>
+        </li>
+        <li>
+            <span class="urun">
+                <img src="limonata.png" alt="" width="56" height="56">
+                Ev yapımı limonata
+            </span>
+            <span class="fiyat">95 TL</span>
+        </li>
+        <li>
+            <span class="urun">
+                <img src="soguk-cikolata.png" alt="" width="56" height="56">
+                Soğuk çikolata
+            </span>
+            <span class="fiyat">130 TL</span>
+        </li>
+    </ul>
+    <h2 id="tatli">Tatlılar</h2>
+    <ul>
+        <li>
+            <span class="urun">
+                <img src="san-sebastian.png" alt="" width="56" height="56">
+                San Sebastian cheesecake
+            </span>
+            <span class="fiyat">180 TL</span>
+        </li>
+        <li>
+            <span class="urun">
+                <img src="brownie.png" alt="" width="56" height="56">
+                Brownie
+            </span>
+            <span class="fiyat">140 TL</span>
+        </li>
+        <li>
+            <span class="urun">
+                <img src="tiramisu.png" alt="" width="56" height="56">
+                Tiramisu
+            </span>
+            <span class="fiyat">160 TL</span>
+        </li>
+    </ul>
+
+
+    <script>
+        function filtrele(secim) {
+            for (const kategori of ['sicak', 'soguk', 'tatli']) {
+                const baslik = document.getElementById(kategori);
+                const gizle = secim !== 'tumu' && secim !== kategori;
+
+                baslik.hidden = gizle;
+                baslik.nextElementSibling.hidden = gizle;
+            }
+
+            const secenekler = ['tumu', 'sicak', 'soguk', 'tatli'];
+            const dugmeler = document.querySelectorAll('button');
+
+            dugmeler.forEach((dugme, sira) => {
+                dugme.setAttribute('aria-pressed', secenekler[sira] === secim);
+            });
+        }
+
+        filtrele('tumu');
+
+    </script>
+</body>
+</html>
